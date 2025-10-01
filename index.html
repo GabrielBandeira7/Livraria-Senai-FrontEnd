@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria</title>
+
+
+    <style>
+body{
+    margin: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+    text-align: center;
+}
+
+form{
+    max-width: 300px;
+    margin: auto;
+    padding: 10px;
+    border: solid 1px #a0a0a0;
+    border-radius: 5px;
+    background-color: #e4e4e4;
+}
+
+label{
+    display:block;
+    margin-top: 10px;
+}
+
+input{
+    width: 100%;
+    padding: 2px;
+    margin-top: 2px;
+    box-sizing: border-box;
+}
+
+button{
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    color: aliceblue;
+    border:solid 1px white;
+    cursor: pointer;
+}
+.btn-cadastrar{
+    background: rgb(37, 180, 24);
+}
+
+.btn-cadastrar:hover{
+    background: green;
+}
+
+.btn-lista{
+    background-color: #7fb3ee;
+    border: solid 1px;
+}
+    </style>
+</head>
+<body>
+    <h2>Cadastro</h2>
+
+    <form>
+        <label for="titulo">Titulo: <input type="text" id="titulo"></label>
+        <label for="autor">Autor: <input type="text" id="autor"></label>
+        <label for="anopublicacao">Ano de publicação<input type="text" id="anopublicacao"></label>
+        <label for="genero">Gênero<input type="text" id="genero"></label>
+        <label for="idioma">Idioma<input type="text" id="idioma"></label>
+        <label for="preco">Preço<input type="number" id="preco"></label>
+        <button type="button" class="btn-cadastrar" onclick="enviar()">Cadastrar</button>
+        <button type="button" class="btn-lista" onclick="irParaLista()">Lista de livros</button>
+        <button type="button" class="btn-editar" onclick="irParaEditar()">Editar livro</button>
+        <button type="button" class="btn-excluir" onclick="irParaExcluir()">Excluir livro</button>
+    </form>
+
+    <script>
+        function enviar(){
+            let inputTitulo = document.getElementById('titulo').value
+            let inputautor = document.getElementById('autor').value
+            let inputanopublicacao = document.getElementById('anopublicacao').value
+            let inputgenero = document.getElementById('genero').value
+            let inputidioma = document.getElementById('idioma').value
+            let inputpreco = document.getElementById('preco').value
+    
+            if(! inputTitulo || !inputautor || !inputanopublicacao || !inputgenero || !inputidioma || !inputpreco){
+                alert("Preencha os campos corretamente")
+                return
+            }
+    
+            if(senha !== Confirmarsenha){
+                alert("As senhas não conferem")
+                return
+            }
+    
+            //Com essa estrtutura nos estamos fazendo uma requisicao ao servidor
+            fetch("http://localhost:3000/livros",{
+                method: "POST",
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify({
+                    inputTitulo: titulo,
+                    inputautor: autor,
+                    inputanopublicacao: anopublicacao,
+                    inputgenero: genero,
+                    inputidioma: idioma,
+                    inputpreco: preco
+                })
+            })
+            .then(response => response.json())
+            .then(function(data){
+                console.log(data);
+                alert(`Usuario com ID ${data.id} cadastro`)
+    
+                //redireciona para a pagina de usuarios
+                window.location.href = "livraria.html";
+            })
+        }
+
+        function irParaLista() {
+            window.location.href= "livraria.html"   
+        }
+        </script>
+</body>
+</html>
