@@ -72,40 +72,40 @@ button{
         <label for="preco">Preço<input type="number" id="preco"></label>
         <button type="button" class="btn-cadastrar" onclick="enviar()">Cadastrar</button>
         <button type="button" class="btn-lista" onclick="irParaLista()">Lista de livros</button>
-        <button type="button" class="btn-editar" onclick="irParaEditar()">Editar livro</button>
-        <button type="button" class="btn-excluir" onclick="irParaExcluir()">Excluir livro</button>
-    </form>
 
     <script>
         function enviar(){
-            let inputTitulo = document.getElementById('titulo').value
+            let inputtitulo = document.getElementById('titulo').value
             let inputautor = document.getElementById('autor').value
             let inputanopublicacao = document.getElementById('anopublicacao').value
             let inputgenero = document.getElementById('genero').value
             let inputidioma = document.getElementById('idioma').value
             let inputpreco = document.getElementById('preco').value
+
+            console.log('front');
+            console.log(inputtitulo, inputanopublicacao, inputautor, inputgenero, inputidioma, inputpreco);
     
-            if(! inputTitulo || !inputautor || !inputanopublicacao || !inputgenero || !inputidioma || !inputpreco){
+            if(! inputtitulo || !inputautor || !inputanopublicacao || !inputgenero || !inputidioma || !inputpreco){
                 alert("Preencha os campos corretamente")
                 return
             }
     
-            if(senha !== Confirmarsenha){
-                alert("As senhas não conferem")
-                return
-            }
+            // if(inputCadastro!== ){
+            //     alert("As senhas não conferem")
+            //     return
+            // }
     
             //Com essa estrtutura nos estamos fazendo uma requisicao ao servidor
             fetch("http://localhost:3000/livros",{
                 method: "POST",
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify({
-                    inputTitulo: titulo,
-                    inputautor: autor,
-                    inputanopublicacao: anopublicacao,
-                    inputgenero: genero,
-                    inputidioma: idioma,
-                    inputpreco: preco
+                    inputtitulo,
+                    inputautor,
+                    inputanopublicacao,
+                    inputgenero,
+                    inputidioma,
+                    inputpreco
                 })
             })
             .then(response => response.json())
